@@ -8,9 +8,31 @@ $(document).ready(function() {
 /*
  * Function that is called when the document is ready.
  */
+
+function projectClick(e) {
+	// prevent the page from reload
+	e.preventDefault();
+	// in an event handler, $(this) refers to 
+	// the object that triggered the event
+	$(this).css("background-color", "#7fff00");
+	var containingProject = $(this).closest(".project");
+	var description = $(containingProject).find(".project-description");
+
+	if (description.length == 0) {
+		$(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
+	} 
+	else {
+		$(containingProject).fadeToggle();
+	}
+}
+
 function initializePage() {
 	$("#testjs").click(function(e) {
-		$('.jumbotron h1').text("Javascript is connected");
+		$('.jumbotron h1').text("Javascript has taken control");
+		$("#testjs").text("Please wait...")
+		$("#testjs").addClass("active");
+		$("#testjs").toggleClass("active")
+		$("a.thumbnail").click(projectClick);
 	});
 
 	// Add any additional listeners here
